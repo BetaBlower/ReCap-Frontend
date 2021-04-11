@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Car } from 'src/app/models/car';
 import { CarDetail } from 'src/app/models/carDetail';
 import { CarService } from 'src/app/services/car/car.service';
@@ -11,7 +12,6 @@ import { CarService } from 'src/app/services/car/car.service';
 export class CarComponent implements OnInit {
 
   cars:Car[] = [];
-  carsDto:CarDetail[]= []; 
   dataLoaded = false;
 
   constructor(private CarService:CarService) { }
@@ -27,7 +27,4 @@ export class CarComponent implements OnInit {
     })
 
   }
-  
-  
-
 }

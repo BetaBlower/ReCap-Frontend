@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CarDetail } from 'src/app/models/carDetail';
 import { CarService } from 'src/app/services/car/car.service';
@@ -11,10 +12,9 @@ import { CarService } from 'src/app/services/car/car.service';
 export class CarDtoComponent implements OnInit {
 
   carDetails:CarDetail[] = [];
-  carde:string[]=["bla bla","bla bla","asdasd","dsadasd","asdasd"];
   dataLoaded=false;
 
-  constructor(private CarService:CarService) { }
+  constructor(private CarService:CarService,private activatedRoute:ActivatedRoute) { }
 
   ngOnInit(): void {
     this.getCarsDetail();
@@ -25,8 +25,16 @@ export class CarDtoComponent implements OnInit {
       this.carDetails = response.data
       this.dataLoaded=true;
     })
-
-
+  }
+  getCarsByBrand(brandId:number){
+    this.CarService.getCarsByBrand(brandId).subscribe(response=>{
+      this.carDetails = response.data
+      this.dataLoaded=true;})
+  }
+  getCarsByColor(colorId:number){
+    this.CarService.getCarsByColor(colorId).subscribe(response=>{
+      this.carDetails = response.data
+      this.dataLoaded=true;})
   }
 
 }
